@@ -32,39 +32,30 @@ class HillCipher(Encryption):
 
     def encrypt(self, plainText):
         plain_text = self.applySettings(plainText)
-        #plain_text = ''.join(plain_text) 
         
+        # Ensure plain_text is not empty and is properly formatted
+        if not plain_text or any(not char.isalpha() for char in plain_text):
+            raise ValueError("Plain text must only contain alphabetic characters and must not be empty.")
+
+        # Pad the text if it has an odd number of characters
         if len(plain_text) % 2 != 0:
-            plain_text += 'Z'
-            
+            plain_text += 'Z'  # Append 'Z' to make the length even
+
         encryptedText = ""
 
         for i in range(0, len(plain_text), 2):
-            pair = [ord(char) - ord('A') for char in plain_text[i:i+2]]
+            try:
+                # Attempt to create a pair of numeric values
+                pair = [ord(char.upper()) - ord('A') for char in plain_text[i:i+2]]  # Ensure upper case for consistency
+            except TypeError:
+                # Handle unexpected string lengths or characters
+                raise ValueError("Error processing characters at indices {}:{}".format(i, i+2))
+            
             result = np.dot(self.key_matrix, pair) % self.mod
-            encryptedText += ''.join([chr(result[j] + ord('A')) for j in range(2)])
-        
-        
-        '''
-        #msgMatrix = [[ord(char) - 65] for char in plain_text]
-        msgMatrix = [[ord(char)-65]for string in plain_text for char in string]
-        keyMatrix = [[ord(char) - 65 for char in self.key[:2]], [ord(char) - 65 for char in self.key[2:4]]]
-
+            encryptedText += ''.join(chr(result[j] + ord('A')) for j in range(2))
     
-        for i in range(0,len(msgMatrix),2):
-            resultMatrix = [[0],[0]]
-        for j in range(2):
-            for k in range(1):
-                for l in range(2):
-                    resultMatrix[j][k] += keyMatrix[j][l] * msgMatrix[l + i][k]
-        for j in range(2):
-            resultMatrix[j][0] %= self.mod
-
-        for j in range(2):
-            encryptedText += chr(resultMatrix[j][0] + 65)
-    '''
         return encryptedText
-    
+
     def decrypt(self, cipherText):
         decryptedText = ""
 
@@ -78,6 +69,5 @@ class HillCipher(Encryption):
 
         return decryptedText
 
-    
 
     

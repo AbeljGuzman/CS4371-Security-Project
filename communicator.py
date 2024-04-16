@@ -53,18 +53,20 @@ class Communicator:
 
     def setSocket(self, socket):
         self.commSocket = socket
-    '''    
+       
     def setEncryption(
         self,
-        key_string,
+        key,
+        key_matrix,
         removeSpace=True,          # Remove space
         encryptSpace=False,         # Encrypt Space
         encryptSymbol=False,        # Encypt Symbol
         upperCaseAll=True,        # Uppercase ALL
-        reverseText = False    # Reverse Plain text
+        reverseText = False,
+        **kwargs
     ):
         self.enableEncyption = True
-        self.cipher = HillCipher(key_string)
+        self.cipher = HillCipher(key_string=self.key, key_matrix= self.key, **kwargs)
         self.cipher.removeSpace = removeSpace
         self.cipher.encryptSpace = encryptSpace
         self.cipher.upperCaseAll = upperCaseAll
@@ -74,7 +76,7 @@ class Communicator:
     def setEncryption(self, key,key_matrix, **kwargs):
         self.enableEncryption = True
         self.cipher = HillCipher(key_string=self.key,key_matrix = self.key,**kwargs)
-
+    '''
     def compress_img(self, img_data):
         return img_data
     
