@@ -63,7 +63,7 @@ class Communicator:
         upperCaseAll=True,        # Uppercase ALL
         reverseText = False    # Reverse Plain text
     ):
-        self.enableEncyption = True
+        self.enableEncryption = True
         self.cipher = HillCipher(key_string)
         self.cipher.removeSpace = removeSpace
         self.cipher.encryptSpace = encryptSpace
