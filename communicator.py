@@ -1,4 +1,5 @@
-from Hill import HillCipher
+from Substitution import SubstitutionCipher
+# from Hill import HillCipher
 
 
 class Communicator:
@@ -12,8 +13,8 @@ class Communicator:
     buf = 512
     
 
-    def __init__(self, id, key):
-        self.key = "FAIL"
+    def __init__(self, id):
+        # self.key = "FAIL"
         self.id = id
         self.enableEncryption = False
     
@@ -57,21 +58,22 @@ class Communicator:
     def setEncryption(
         self,
         key,
-        key_matrix,
+        # key_matrix,
         removeSpace=True,          # Remove space
         encryptSpace=False,         # Encrypt Space
         encryptSymbol=False,        # Encypt Symbol
         upperCaseAll=True,        # Uppercase ALL
         reverseText = False,
-        **kwargs
+        #**kwargs
     ):
-        self.enableEncyption = True
-        self.cipher = HillCipher(key_string=self.key, key_matrix= self.key, **kwargs)
+        self.enableEncryption = True
+        self.cipher = SubstitutionCipher(key)
         self.cipher.removeSpace = removeSpace
         self.cipher.encryptSpace = encryptSpace
         self.cipher.upperCaseAll = upperCaseAll
         self.cipher.reverseText = reverseText
         self.cipher.encryptSymbol = encryptSymbol
+        
     '''
     def setEncryption(self, key,key_matrix, **kwargs):
         self.enableEncryption = True
