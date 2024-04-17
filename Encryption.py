@@ -7,6 +7,7 @@ class Encryption:
     key = None
     key_matrix = None
     name = "Main"
+    alphabet = None
     
     def __init__(self, key, key_matrix,removeSpace=True, encryptSpace=False, encryptSymbol=False, upperCaseAll=True, reverseText=False) -> None:
         self.removeSpace = removeSpace
@@ -16,6 +17,10 @@ class Encryption:
         self.reverseText = reverseText
         self.key = "FAIL"
         self.key_matrix = key
+        self.alphabet = self.defineAlphabet()
+        
+    def defineAlphabet(self):
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ:_"
     
     def describe(self):
         return {
