@@ -29,7 +29,7 @@ class Hub(Communicator):
         '''
         Constructor: Instantiates a Hub instance.
         '''
-        super().__init__(id,KEY)
+        super().__init__(id)
 
         # assign private properties
         self.name = name
@@ -202,7 +202,7 @@ def main():
     input_port = HUB_PORT
     hub = Hub("HUB", input_ip, input_port)
 
-    hub.setEncryption(KEY, key_matrix=KEY,upperCaseAll=False, removeSpace=False)
+    hub.setEncryption(KEY,upperCaseAll=False, removeSpace=False)
 
     receive_thread = threading.Thread(target=hub.receive_message, args=(hub,))
     user_input_thread = threading.Thread(target=hub.user_input_loop, args=(hub,))
