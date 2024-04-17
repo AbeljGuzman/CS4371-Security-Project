@@ -31,43 +31,46 @@ class HillCipher(Encryption):
 
 
     def encrypt(self, plainText):
-        plain_text = self.applySettings(plainText)
-        
-        # Ensure plain_text is not empty and is properly formatted
-        if not plain_text or any(not char.isalpha() for char in plain_text):
-            raise ValueError("Plain text must only contain alphabetic characters and must not be empty.")
-
-        # Pad the text if it has an odd number of characters
+        # Process text
+        plain_text = ''.join([char.upper() for char in plainText if char.isalpha()])
         if len(plain_text) % 2 != 0:
-            plain_text += 'Z'  # Append 'Z' to make the length even
+            plain_text += 'X'  # Append 'X' to ensure even length for pairs
 
         encryptedText = ""
-
         for i in range(0, len(plain_text), 2):
-            try:
-                # Attempt to create a pair of numeric values
-                pair = [ord(char.upper()) - ord('A') for char in plain_text[i:i+2]]  # Ensure upper case for consistency
-            except TypeError:
-                # Handle unexpected string lengths or characters
-                raise ValueError("Error processing characters at indices {}:{}".format(i, i+2))
-            
+            pair = [ord(char) - ord('A') for char in plain_text[i:i+2]]
             result = np.dot(self.key_matrix, pair) % self.mod
-            encryptedText += ''.join(chr(result[j] + ord('A')) for j in range(2))
-    
+            encryptedText += ''.join(chr(int(r) + ord('A')) for r in result)
+
         return encryptedText
 
     def decrypt(self, cipherText):
         decryptedText = ""
+        inverse_key = np.linalg.inv(self.key_matrix)  # Calculate inverse
+        det = int(round(np.linalg.det(self.key_matrix)))  # Determinant
+        det_inv = pow(det, -1, self.mod)  # Modular inverse of the determinant
 
-        inverse_key = np.linalg.inv(self.key_matrix)
-        inverse_key = np.round(inverse_key *np.linalg.det(self.key_matrix) * np.linalg.det(inverse_key) ** -1).astype(int) % self.mod
+        inverse_key = (inverse_key * det_inv) % self.mod  # Adjusted inverse key
 
         for i in range(0, len(cipherText), 2):
             pair = [ord(char) - ord('A') for char in cipherText[i:i+2]]
             result = np.dot(inverse_key, pair) % self.mod
-            decryptedText += ''.join([chr(result[j] + ord('A')) for j in range(2)])
+            decryptedText += ''.join(chr(int(r) + ord('A')) for r in result)
 
         return decryptedText
 
+def main():
+    key_string = "ABCD"
+    key_matrix = [[6, 25], [1, 3]]  # Ensure this matrix is invertible under modValue
+    cipher = HillCipher(key_matrix, key_string)
 
+    plaintext = "get_state"
+    print("Original Plaintext:", plaintext)
+    encrypted_text = cipher.encrypt(plaintext)
+    print("Encrypted Text:", encrypted_text)
+    decrypted_text = cipher.decrypt(encrypted_text)
+    print("Decrypted Text:", decrypted_text)
+
+if __name__ == "__main__":
+    main()
     

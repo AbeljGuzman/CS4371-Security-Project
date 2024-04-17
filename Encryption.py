@@ -35,18 +35,23 @@ class Encryption:
         }
     
     
-    # Returns cleaned plaintext and indexes to skip  
     def applySettings(self, plainText):
+        # Remove spaces if required
         if self.removeSpace:
-            plainText = self.deleteSpace(plainText) 
+            plainText = plainText.replace(" ", "")
         
+        # Convert text to uppercase if required
         if self.upperCaseAll:
-            plainText = self.convertToUppercase(plainText)
-            
-        if self.reverseText:
-            plainText = self.reverseString(plainText)
+            plainText = plainText.upper()
+        
+        # Reverse the text if required
+        if getattr(self, 'reverseText', False):  # Ensure reverseText attribute exists
+            plainText = plainText[::-1]
 
-        return plainText, [i for i, char in enumerate(plainText) if not str(char).isalpha()]
+        # Calculate non-alphabetic character indices
+        non_alpha_indices = [i for i, char in enumerate(plainText) if not char.isalpha()]
+
+        return plainText, non_alpha_indices
             
     def encrypt(self, plainText):
         pass
