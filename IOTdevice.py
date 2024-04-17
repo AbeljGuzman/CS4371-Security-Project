@@ -4,8 +4,8 @@ from communicator import Communicator
 
 
 class IOTDevice(Communicator):
-    def __init__(self, id, key):
-        super().__init__(id, key)
+    def __init__(self, id):
+        super().__init__(id)
 
     def send(self, message, recipient, data_type=None, TCP_socket=None, server_addr=None):        
         if data_type == 'image':            
