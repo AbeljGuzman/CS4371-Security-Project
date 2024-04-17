@@ -1,9 +1,8 @@
 import sys
-
 import numpy as np
-
 from Encryption import Encryption
 
+# not currently working as intended
 
 class HillCipher(Encryption):
     key_string = "FAIL"
