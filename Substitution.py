@@ -1,6 +1,7 @@
 import random
 from Encryption import Encryption
 
+# Substitution Cipher class
 class SubstitutionCipher(Encryption):
 
     def __init__(self,
@@ -40,6 +41,7 @@ class SubstitutionCipher(Encryption):
             'z': 'm'
         }
 
+    # encrypts the plain text using the substitution cipher
     def encrypt(self, plainText):
         plain = plainText
         encryptedMessage = ""
@@ -51,6 +53,7 @@ class SubstitutionCipher(Encryption):
         
         return encryptedMessage
     
+    # decrypts the cipher text using the substitution cipher
     def decrypt(self, cipherText):
         cipher = cipherText
 
