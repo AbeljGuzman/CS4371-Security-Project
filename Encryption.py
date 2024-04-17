@@ -4,23 +4,24 @@ class Encryption:
     encryptSpace = None
     encryptSymbol = None
     reverseText = None
-    key = None
-    key_matrix = None
     name = "Main"
     alphabet = None
     
-    def __init__(self, key, key_matrix,removeSpace=True, encryptSpace=False, encryptSymbol=False, upperCaseAll=True, reverseText=False) -> None:
+    def __init__(self, removeSpace=True, encryptSpace=False, encryptSymbol=False, upperCaseAll=True, reverseText=False) -> None:
         self.removeSpace = removeSpace
         self.encryptSpace = encryptSpace
         self.encryptSymbol = encryptSymbol
         self.upperCaseAll = upperCaseAll
         self.reverseText = reverseText
-        self.key = "FAIL"
-        self.key_matrix = key
-        self.alphabet = self.defineAlphabet()
-        
+        # self.key = "FAIL"
+        # self.key_matrix = key
+        # self.alphabet = self.defineAlphabet()
+
+    # not used for substituion cipher
+    """  
     def defineAlphabet(self):
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZ:_"
+    """
     
     def describe(self):
         return {
@@ -34,7 +35,8 @@ class Encryption:
             "Symbol Encrypt" : self.encryptSymbol
         }
     
-    
+    # not used for substitution cipher
+    """
     def applySettings(self, plainText):
         # Remove spaces if required
         if self.removeSpace:
@@ -52,6 +54,7 @@ class Encryption:
         non_alpha_indices = [i for i, char in enumerate(plainText) if not char.isalpha()]
 
         return plainText, non_alpha_indices
+    """
             
     def encrypt(self, plainText):
         pass
