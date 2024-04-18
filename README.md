@@ -3,11 +3,11 @@
 
 
 ## Members:
-#Danny Pham
-#Abel Guzman
-#Dylan Eiseman
-#Justin Balarbar
-#Blake Woods
+# Danny Pham
+# Abel Guzman
+# Dylan Eiseman
+# Justin Balarbar
+# Blake Woods
 
 *Instructions to run*
 Dependency:
@@ -148,13 +148,3 @@ References
 	Celik, Z. B., Babun, L., Sikder, A. K., Aksu, H., Tan, G., McDaniel, P., & Uluagac, A. S. (2018). Sensitive Information Tracking in Commodity IoT. In Proceedings of the USENIX Security Symposium. Baltimore, MD. Retrieved from https://github.com/IoTBench/
 
 	Hoover, B., Hsu, J., Pradhan, M., Valdez, A., & Vu, V. (2023). Smart-Home [Software]. Bitbucket. Retrieved from https://bitbucket.org/cs4371compsecurity/smart-home/src/master/
-
-
-
-
-
-
-
-
-
-	
