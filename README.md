@@ -3,11 +3,11 @@
 
 
 ## Members:
-# Danny Pham
-# Abel Guzman
-# Dylan Eiseman
-# Justin Balarbar
-# Blake Woods
+ Danny Pham
+ Abel Guzman
+ Dylan Eiseman
+ Justin Balarbar
+ Blake Woods
 
 *Instructions to run*
 Dependency:
